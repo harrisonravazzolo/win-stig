@@ -1,11 +1,11 @@
 <Add>
   <Item>
     <Target>
-      <LocURI>./Device/Vendor/MSFT/Policy/Config/ADMX_Netlogon/RequireSignOrSeal</LocURI>
+      <LocURI>./Device/Vendor/MSFT/Policy/Config/WindowsPowerShell/TurnOnPowerShellScriptBlockLogging</LocURI>
     </Target>
     <Meta>
       <Format xmlns="syncml:metinf">chr</Format>
     </Meta>
-    <Data><![CDATA[<enabled/><data id="RequireSignOrSeal" value="0"/>]]></Data>
+    <Data><![CDATA[<enabled/>]]></Data>
   </Item>
 </Add>
