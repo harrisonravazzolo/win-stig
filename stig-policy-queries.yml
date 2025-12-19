@@ -131,6 +131,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: SolicitedRemoteAssistance
 
 ---
 apiVersion: v1
@@ -150,6 +151,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: RestrictUnauthenticatedRPCClients.xml
 
 ---
 apiVersion: v1
@@ -189,6 +191,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: AllowMicrosoftAccountsToBeOptional.xml
 
 ---
 apiVersion: v1
@@ -286,6 +289,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PromptForPasswordUponConnection.xml
 
 ---
 apiVersion: v1
@@ -325,6 +329,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: RequireSignOrSeal.ps1
 
 ---
 apiVersion: v1
@@ -344,6 +349,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: SealSecureChannel.ps1
 
 ---
 apiVersion: v1
@@ -363,6 +369,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: SignSecureChannel.ps1
 
 ---
 apiVersion: v1
@@ -377,12 +384,12 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Network access:
     Do not allow anonymous enumeration of SAM accounts" to "Enabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RestrictAnonymousSAM'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\restrictanonymoussam'
     AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
-
+  fix: restrictanonymoussam.ps1
 ---
 apiVersion: v1
 kind: policy
@@ -495,9 +502,7 @@ spec:
     An alternate encryption application may be used in lieu of BitLocker providing
     it is configured for full disk encryption and satisfies the pre-boot authentication
     requirements (WN11-00-000031 and WN11-00-000032).'
-  query: '-- Manual check required: WN11-00-000030
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM bitlocker_info WHERE drive_letter='C:' AND protection_status=1;
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
@@ -555,7 +560,7 @@ apiVersion: v1
 kind: policy
 spec:
   name: STIG - Windows 11 systems must use a BitLocker PIN with a minimum length of
-    six digits for pre-boot authentication.
+    six digits for pre-boot authenti0
   platforms: windows
   platform: windows
   description: If data at rest is unencrypted, it is vulnerable to disclosure. Even
@@ -1425,11 +1430,13 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Network access:
     Do not allow anonymous enumeration of SAM accounts and shares" to "Enabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\RestrictAnonymous'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\restrictanonymous'
     AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: restrictanonymous.ps1
+
 
 ---
 apiVersion: v1
@@ -3134,6 +3141,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DontDisplayNetworkSelectionUI.xml
 
 ---
 apiVersion: v1
@@ -3176,6 +3184,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: AppCompatTurnOffProgramInventor.xml
 
 ---
 apiVersion: v1
@@ -3197,6 +3206,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: DisallowAutoplayForNonVolumeDevices.xml
 
 ---
 apiVersion: v1
@@ -3347,6 +3357,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowTelemetry.xml
 
 ---
 apiVersion: v1
@@ -3707,11 +3718,12 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Network access:
     Let Everyone permissions apply to anonymous users" to "Disabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\EveryoneIncludesAnonymous'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\everyoneincludesanonymous'
     AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: everyoneincludesanonymous.ps1
 
 ---
 apiVersion: v1
@@ -3734,6 +3746,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: SafeForScripting.xml
 
 ---
 apiVersion: v1
@@ -3755,6 +3768,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowAutomaticRestartSignOn.xml
 
 ---
 apiVersion: v1
@@ -3778,6 +3792,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: TurnOnPowerShellScriptBlockLogging.xml
 
 ---
 apiVersion: v1
@@ -3820,6 +3835,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: AllowBasicAuthentication_Client.xml
 
 ---
 apiVersion: v1
@@ -3840,6 +3856,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowUnencryptedTraffic_Client.xml
 
 ---
 apiVersion: v1
@@ -3862,6 +3879,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: AllowBasicAuthentication_Service.xml
 
 ---
 apiVersion: v1
@@ -3882,6 +3900,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowUnencryptedTraffic_Service.xml
 
 ---
 apiVersion: v1
@@ -3902,6 +3921,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisallowStoringOfRunAsCredentials.xml
 
 ---
 apiVersion: v1
@@ -3920,9 +3940,10 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisallowDigestAuthentication.xml
 
 ---
-apiVersion: v1
+apiVersion: v1 - Come back to, CSP error
 kind: policy
 spec:
   name: STIG - Windows 11 must be configured to prevent Windows apps from being activated
@@ -3956,13 +3977,13 @@ spec:
   description: This policy controls whether a domain user can sign in using a convenience
     PIN to prevent enabling (Password Stuffer).
   resolution: Disable the convenience PIN sign-in.   To correct this, configure the
-    policy value for Computer Configuration >> Administrative Templates >> System
-    >> Logon >> Set "Turn on convenience PIN sign-in" to "Disabled".
+    policy value for Computer Configuration >> Administrative Templates >> System Logon >> Set "Turn on convenience PIN sign-in" to "Disabled".
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\System\AllowDomainPINLogon'
-    AND data = '');
+    AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowPINLogon.xml
 
 ---
 apiVersion: v1
@@ -4005,7 +4026,8 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: DeviceEnumerationPolicy.xml
+  
 ---
 apiVersion: v1
 kind: policy
@@ -4192,6 +4214,8 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: LimitBlankPasswordUse.ps1
+
 
 ---
 apiVersion: v1
@@ -4634,11 +4658,12 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Network security:
     Do not store LAN Manager hash value on next password change" to "Enabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\NoLMHash'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\NoLmHash'
     AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: NoLMHash.ps1
 
 ---
 apiVersion: v1
