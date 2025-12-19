@@ -1,0 +1,11 @@
+<Add>
+  <Item>
+    <Target>
+      <LocURI>./Device/Vendor/MSFT/Policy/Config/ADMX_Netlogon/RequireSignOrSeal</LocURI>
+    </Target>
+    <Meta>
+      <Format xmlns="syncml:metinf">chr</Format>
+    </Meta>
+    <Data><![CDATA[<enabled/><data id="RequireSignOrSeal" value="0"/>]]></Data>
+  </Item>
+</Add>
