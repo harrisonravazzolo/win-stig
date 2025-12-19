@@ -131,7 +131,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
-  fix: SolicitedRemoteAssistance
+  fix: SolicitedRemoteAssistance.xml
 
 ---
 apiVersion: v1
@@ -207,9 +207,7 @@ spec:
     Guard to be configured and enabled properly. Virtualization-based security and
     Credential Guard are only available with Windows 11 Enterprise 64-bit version.
   resolution: Use Windows 11 Enterprise 64-bit version for domain-joined systems.
-  query: '-- Manual check required: WN11-00-000005
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM os_version WHERE codename LIKE '%Enterprise%' AND arch = '64-bit'
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
@@ -244,12 +242,11 @@ spec:
     or traffic.
   resolution: Uninstall "Telnet Client" from the system.  Run "Programs and Features".
     Select "Turn Windows Features on or off".  De-select "Telnet Client".
-  query: '-- Manual check required: WN11-00-000115
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM file WHERE path = 'C:\Windows\System32\telnet.exe')
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisableTelnet.ps1
 
 ---
 apiVersion: v1
@@ -262,13 +259,11 @@ spec:
     do not support required security features, such as encrypting passwords or traffic.
   resolution: Uninstall "TFTP Client" from the system.  Run "Programs and Features".
     Select "Turn Windows Features on or off". De-select "TFTP Client".
-  query: '-- Manual check required: WN11-00-000120
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM file WHERE path = 'C:\Windows\System32\tftp.exe')
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: DisableTftp.ps1
 ---
 apiVersion: v1
 kind: policy
@@ -410,13 +405,11 @@ spec:
     virtual desktop.  For VDIs where the virtual desktop instance is deleted or refreshed
     upon logoff, this is NA.  Ensure domain-joined systems must have a TPM that is
     configured for use. (Versi...
-  query: '-- Manual check required: WN11-00-000010
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM tpm_info WHERE activated  = 1 AND enabled = 1;
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: No fix. Alert only.
 ---
 apiVersion: v1
 kind: policy
@@ -431,12 +424,11 @@ spec:
     Guard. Systems with UEFI that are operating in Legacy BIOS mode will not support
     these security features.
   resolution: Configure UEFI firmware to run in UEFI mode, not Legacy BIOS mode.
-  query: '-- Manual check required: WN11-00-000015
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM platform_info WHERE firmware_type = 'uefi'
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: No fix. Alert only?
 
 ---
 apiVersion: v1
@@ -450,12 +442,11 @@ spec:
     in Windows 11, including virtualization-based Security and Credential Guard. If
     Secure Boot is turned off, these security features will not function.
   resolution: Enable Secure Boot in the system firmware.
-  query: '-- Manual check required: WN11-00-000020
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM secureboot WHERE secure_boot = 1;
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: No fix. Alerting only.
 
 ---
 apiVersion: v1
@@ -506,6 +497,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: Enable via Fleet MDM.
 
 ---
 apiVersion: v1
@@ -548,19 +540,18 @@ spec:
     Drives "Require additional authentication at startup" to "Enabled" with "Configure
     TPM Startup PIN:" set to "Require startup PIN with TPM" or with "Configure TPM
     startup key and PIN:" set to "Require startup key and PIN with TPM".
-  query: SELECT 1 FROM registry WHERE path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\FVE\UseAdvancedStartup'
-    AND (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\FVE\UseTPMPIN' AND
-    data = '1');
+  query: SELECT 1 FROM bitlocker_key_protectors WHERE drive_letter = 'C:' AND key_protector_type = 4;
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: Enable Bitlocker PIN via Fleet MDM.
 
 ---
 apiVersion: v1
 kind: policy
 spec:
   name: STIG - Windows 11 systems must use a BitLocker PIN with a minimum length of
-    six digits for pre-boot authenti0
+    six digits for pre-boot authention
   platforms: windows
   platform: windows
   description: If data at rest is unencrypted, it is vulnerable to disclosure. Even
@@ -579,6 +570,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: Enable Bitlocker PIN via Fleet MDM.
 
 ---
 apiVersion: v1
@@ -660,12 +652,11 @@ spec:
     the security and proper access controls of a system. To support this, volumes
     must be formatted using the NTFS file system.
   resolution: Format all local volumes to use NTFS.
-  query: '-- Manual check required: WN11-00-000050
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 from logical_drives WHERE file_system = 'ntfs';
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: No fix, alerting only.
 
 ---
 apiVersion: v1
@@ -896,13 +887,11 @@ spec:
   resolution: Uninstall "Simple Network Management Protocol (SNMP)" from the system.  Run
     "Programs and Features". Select "Turn Windows Features on or off". De-select "Simple
     Network Management Protocol (SNMP)".
-  query: '-- Manual check required: WN11-00-000105
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 WHERE NOT EXISTS (SELECT 1 FROM file WHERE path = 'C:\Windows\System32\snmp.exe')
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: DisableSnmp.ps1
 ---
 apiVersion: v1
 kind: policy
@@ -991,11 +980,11 @@ spec:
     of the SecGuide custom templates included with the STIG package. "SecGuide.admx"
     and "SecGuide.adml" must be copied to the \Windows\PolicyDefinitions and \Windows\PolicyDefinitions\en-US
     directories respectively.
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session
-    Manager\kernel\DisableExceptionChainValidation' AND data = '0');
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableExceptionChainValidation' AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: DisableExceptionChainValidation.ps1
 
 ---
 apiVersion: v1
@@ -1014,12 +1003,12 @@ spec:
     both "MicrosoftWindowsPowerShellV2Root" and "MicrosoftWindowsPowerShellV2" which
     correspond to "Windows PowerShell 2.0" and "Windows PowerShell 2.0 Engine" respectively
     in "Turn Windows features on or off".  Alternately: Search for "Features...'
-  query: '-- Manual check required: WN11-00-000155
-
-    SELECT 0 WHERE 1=0;'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\PowerShell\3\PowerShellEngine\PowerShellVersion'
+    AND data >= '2');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: None - depreciated. Updated query.
 
 ---
 apiVersion: v1
@@ -4301,6 +4290,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: DisablePasswordChange.ps1
 
 ---
 apiVersion: v1
@@ -4336,7 +4326,7 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Domain member:
     Require strong (Windows 2000 or Later) session key" to "Enabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters\RequireStrongKey'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters\a'
     AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
@@ -4388,6 +4378,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: No fix, alert and custom script.
 
 ---
 apiVersion: v1
@@ -4409,6 +4400,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: No fix, alert and custom script.
 
 ---
 apiVersion: v1
