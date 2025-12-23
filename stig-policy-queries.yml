@@ -1032,6 +1032,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PasswordRequirements.xml
 
 ---
 apiVersion: v1
@@ -1253,6 +1254,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PasswordRequirements.xml
 
 ---
 apiVersion: v1
@@ -1298,6 +1300,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PasswordRequirements.xml
 
 ---
 apiVersion: v1
@@ -1319,7 +1322,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: PasswordRequirements.xml
 ---
 apiVersion: v1
 kind: policy
@@ -1340,7 +1343,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: PasswordRequirements.xml
 ---
 apiVersion: v1
 kind: policy
@@ -1360,6 +1363,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PasswordRequirements.xml
 
 ---
 apiVersion: v1
@@ -2902,6 +2906,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: IncludeCmdLine.xml
 
 ---
 apiVersion: v1
@@ -2928,6 +2933,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: EnableVirtualizationBasedSecurity.xml
 
 ---
 apiVersion: v1
@@ -2977,6 +2983,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: HypervisorEnforcedCodeIntegrity.xml
 
 ---
 apiVersion: v1
@@ -3001,6 +3008,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: BootStartDriverInitialization.xml
 
 ---
 apiVersion: v1
@@ -3038,11 +3046,11 @@ spec:
   resolution: Configure the policy value for Computer Configuration >> Administrative
     Templates >> System >> Internet Communication Management >> Internet Communication
     settings >> "Turn off downloading of print drivers over HTTP" to "Enabled".
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows
-    NT\Printers\DisableWebPnPDownload' AND data = '1');
+  query: SELECT 1 FROM registry WHERE (path like 'HKEY_USERS\%\Software\Policies\Microsoft\Windows NT\Printers\DisableWebPnPDownload' AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisableWebPnPDownload_1.xml
 
 ---
 apiVersion: v1
@@ -3066,7 +3074,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: DisableInternetDownloadForWebPublishingAndOnlineOrderingWizards.xml
 ---
 apiVersion: v1
 kind: policy
@@ -3083,11 +3091,11 @@ spec:
   resolution: Configure the policy value for Computer Configuration >> Administrative
     Templates >> System >> Internet Communication Management >> Internet Communication
     settings >> "Turn off printing over HTTP" to "Enabled".
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows
-    NT\Printers\DisableHTTPPrinting' AND data = '1');
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Policies\Microsoft\Windows NT\Printers\DisableHTTPPrinting' AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisablePrintingOverHTTP.xml
 
 ---
 apiVersion: v1
@@ -3432,6 +3440,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: TurnOffHeapTerminationOnCorruption.xml
 
 ---
 apiVersion: v1
@@ -3472,7 +3481,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: AllowGameDVR.xml
 ---
 apiVersion: v1
 kind: policy
@@ -3532,6 +3541,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DoNotAllowPasswordSaving.xml
 
 ---
 apiVersion: v1
@@ -3553,6 +3563,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DoNotAllowDriveRedirection.xml
 
 ---
 apiVersion: v1
@@ -3575,6 +3586,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: RequireSecureRPCCommunication.xml
 
 ---
 apiVersion: v1
@@ -3596,6 +3608,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: ClientConnectionEncryptionLevel.xml
 
 ---
 apiVersion: v1
@@ -3614,6 +3627,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisableEnclosureDownloading.xml
 
 ---
 apiVersion: v1
@@ -3653,6 +3667,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowIndexingEncryptedStoresOrItems.xml
 
 ---
 apiVersion: v1
@@ -4225,6 +4240,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  TODO: ./Device/Vendor/MSFT/Policy/Config/LocalPoliciesSecurityOptions/Accounts_RenameAdministratorAccount
 
 ---
 apiVersion: v1
@@ -4290,7 +4306,6 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
-  fix: DisablePasswordChange.ps1
 
 ---
 apiVersion: v1
@@ -4326,7 +4341,7 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Domain member:
     Require strong (Windows 2000 or Later) session key" to "Enabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters\a'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Netlogon\Parameters\RequireStrongKey'
     AND data = '1');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
@@ -4354,6 +4369,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: PasswordRequirements.xml
 
 ---
 apiVersion: v1
@@ -4378,7 +4394,6 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-  fix: No fix, alert and custom script.
 
 ---
 apiVersion: v1
@@ -4400,7 +4415,6 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
-  fix: No fix, alert and custom script.
 
 ---
 apiVersion: v1
@@ -4744,6 +4758,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: FIPSAlgorithmPolicy.ps1
 
 ---
 apiVersion: v1
@@ -4766,6 +4781,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: EnableProtectionMode.ps1
 
 ---
 apiVersion: v1
@@ -4787,6 +4803,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: UseAdminApprovalMode.xml
 
 ---
 apiVersion: v1
@@ -4805,10 +4822,11 @@ spec:
     Behavior of the elevation prompt for administrators in Admin Approval Mode" to
     "Prompt for consent on the secure desktop".'
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System\ConsentPromptBehaviorAdmin'
-    AND data = '2 (Prompt for consent on the secure desktop)');
+    AND data = '2');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: BehaviorOfTheElevationPromptForAdministrators.xml
 
 ---
 apiVersion: v1
@@ -4876,6 +4894,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: BehaviorOfTheElevationPromptForStandardUsers.xml
 
 ---
 apiVersion: v1
@@ -4897,6 +4916,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DetectApplicationInstallationsAndPromptForElevation.xml
 
 ---
 apiVersion: v1
@@ -4920,7 +4940,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
-
+  fix: OnlyElevateUIAccessApplicationsThatAreInstalledInSecureLocations.xml
 ---
 apiVersion: v1
 kind: policy
@@ -4940,6 +4960,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: RunAllAdministratorsInAdminApprovalMode.xml
 
 ---
 apiVersion: v1
@@ -4961,6 +4982,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: VirtualizeFileAndRegistryWriteFailuresToPerUserLocations.xml
 
 ---
 apiVersion: v1
@@ -5007,6 +5029,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: NoLockScreenToastNotification.xml
 
 ---
 apiVersion: v1
