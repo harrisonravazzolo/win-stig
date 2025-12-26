@@ -3649,11 +3649,11 @@ spec:
     RSS Feeds >> "Turn on Basic feed authentication over HTTP" to "Not Configured"
     or "Disabled".
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Internet
-    Explorer\Feeds\AllowBasicAuthInClear' AND data = '0 (or if the Value Name does
-    not exist)');
+    Explorer\Feeds\AllowBasicAuthInClear' AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: AllowBasicAuthInClear.ps1
 
 ---
 apiVersion: v1
