@@ -3160,6 +3160,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: EnumerateLocalUsersOnDomainJoinedComputers.xml
 
 ---
 apiVersion: v1
@@ -3306,6 +3307,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: EnumerateAdministrators.xml
 
 ---
 apiVersion: v1
@@ -3331,6 +3333,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: LimitEnhancedDiagnosticDataWindowsAnalytics.xml, AllowTelemetry.xml
 
 ---
 apiVersion: v1
