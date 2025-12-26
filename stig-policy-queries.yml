@@ -3405,6 +3405,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: TO REVIEW
 
 ---
 apiVersion: v1
