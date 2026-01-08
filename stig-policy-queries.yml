@@ -4468,11 +4468,11 @@ spec:
     >> Security Settings >> Local Policies >> Security Options >> "Interactive logon:
     Smart card removal behavior" to "Lock Workstation" or "Force Logoff".'
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows
-    NT\CurrentVersion\Winlogon\SCRemoveOption' AND data = '1 (Lock Workstation) or
-    2 (Force Logoff)');
+    NT\CurrentVersion\Winlogon\scremoveoption' AND data = '2');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: scremoveoption.ps1
 
 ---
 apiVersion: v1
