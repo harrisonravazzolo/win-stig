@@ -3379,12 +3379,12 @@ spec:
     Templates >> Windows Components >> Delivery Optimization >> "Download Mode" to
     "Enabled" with any option except "Internet" selected.  Acceptable selections include:
     Bypass (100) Group (2) HTTP only (0) LAN (1) Simple (99)  .'
-  query: SELECT 1 FROM registry WHERE path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization\DODownloadMode'
-    AND (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\DeliveryOptimization\Config\DODownloadMode'
-    AND data = '0');
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization\DODownloadMode'
+    AND data = '99');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: DODownloadMode.ps1
 
 ---
 apiVersion: v1
