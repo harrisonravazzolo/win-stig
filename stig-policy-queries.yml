@@ -4631,11 +4631,12 @@ spec:
     >> Security Settings >> Local Policies >> Security Options >> "Network security:
     Allow PKU2U authentication requests to this computer to use online identities"
     to "Disabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA\pku2u\AllowOnlineID'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\pku2u\AllowOnlineID'
     AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: NetworkSecurity_AllowPKU2UAuthenticationRequests.xml
 
 ---
 apiVersion: v1
