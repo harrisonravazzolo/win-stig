@@ -4610,11 +4610,12 @@ spec:
   resolution: 'Configure the policy value for Computer Configuration >> Windows Settings
     >> Security Settings >> Local Policies >> Security Options >> "Network security:
     Allow LocalSystem NULL session fallback" to "Disabled".'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\LSA\MSV1_0\allownullsessionfallback'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\allownullsessionfallback'
     AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: NetworkSecurity_AllowLocalSystemNULLSessionFallback.xml
 
 ---
 apiVersion: v1
