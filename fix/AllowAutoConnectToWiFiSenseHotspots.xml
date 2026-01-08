@@ -6,6 +6,6 @@
     <Target>
       <LocURI>./Device/Vendor/MSFT/Policy/Config/Wifi/AllowAutoConnectToWiFiSenseHotspots</LocURI>
     </Target>
-    <Data>1</Data>
+    <Data>0</Data>
   </Item>
 </Add>
