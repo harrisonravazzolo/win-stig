@@ -4744,11 +4744,12 @@ spec:
     Minimum session security for NTLM SSP based (including secure RPC) servers" to
     "Require NTLMv2 session security" and "Require 128-bit encryption" (all options
     selected).'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\NTLMMinServerSec'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0\NtlmMinServerSec'
     AND data = '537395200');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: NetworkSecurity_MinimumSessionSecurityForNTLMSSPBasedServers.xml
 
 ---
 apiVersion: v1
