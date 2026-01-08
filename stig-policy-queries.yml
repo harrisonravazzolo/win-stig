@@ -4494,6 +4494,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: RequireSecuritySignature.ps1
 
 ---
 apiVersion: v1
