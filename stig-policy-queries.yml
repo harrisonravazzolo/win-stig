@@ -3434,10 +3434,11 @@ spec:
     >> Administrative Templates >> Windows Components >> File Explorer >> "Turn off
     Data Execution Prevention for Explorer" to "Not Configured" or "Disabled".
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Explorer\NoDataExecutionPrevention'
-    AND data = '0 (or if the Value Name does not exist)');
+    AND data = '0');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: NoDataExecutionPrevention.ps1
 
 ---
 apiVersion: v1
