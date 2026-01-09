@@ -2615,11 +2615,12 @@ spec:
     routing is completely disabled".  This policy setting requires the installation
     of the MSS-Legacy custom templates included with the STIG package. "MSS-Legacy.admx"
     and "MSS-Legacy.adml" must be copied to the \Windows\PolicyDefinitions and \Windows\PolicyDef...'
-  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\DisableIpSourceRouting'
+  query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters\DisableIPSourceRouting'
     AND data = '2');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: DisableIpSourceRouting.ps1
 
 ---
 apiVersion: v1
