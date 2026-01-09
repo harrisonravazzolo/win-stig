@@ -2667,7 +2667,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
-
+  fix: NoNameReleaseOnDemand.ps1
 ---
 apiVersion: v1
 kind: policy
