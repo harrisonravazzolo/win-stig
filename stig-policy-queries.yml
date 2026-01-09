@@ -2845,10 +2845,11 @@ spec:
     connections to the Internet or a Windows Domain" to "Enabled".  Under "Options",
     set "Minimize Policy Options" to "3 = Prevent Wi-Fi When on Ethernet".
   query: SELECT 1 FROM registry WHERE (path = 'HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\WcmSvc\GroupPolicy\fMinimizeConnections'
-    AND data = '3 (or if the Value Name does not exist)');
+    AND data = '3');
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_medium
   contributors: DISA STIG
+  fix: fMinimizeConnections.ps1
 
 ---
 apiVersion: v1
