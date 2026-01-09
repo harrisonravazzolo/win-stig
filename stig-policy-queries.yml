@@ -1796,6 +1796,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_low
   contributors: DISA STIG
+  fix: EnableICMPRedirect.ps1
 
 ---
 apiVersion: v1
