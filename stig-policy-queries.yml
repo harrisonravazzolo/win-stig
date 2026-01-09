@@ -2971,6 +2971,7 @@ spec:
   purpose: Informational
   tags: compliance, STIG, STIG_Win11_v2, severity_high
   contributors: DISA STIG
+  fix: LsaCfgFlags.ps1
 
 ---
 apiVersion: v1
